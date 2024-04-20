@@ -10,10 +10,14 @@
         password: Optional[str]
         organization_code: str
 
+    class CreateTraineeResponse(JsonModel):
+        uuid: uuid
+        request_data: CreateOrganizationRequest[]
+
 
     @router.post(
         "/student",
-        response_model=StudentResponse,
+        response_model=CreateTraineeResponse,
         summary="Create a new Student",
         description="Create a new Student under provided organization",
         response_description="New Student’s meta data",
