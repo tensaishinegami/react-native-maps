@@ -12,21 +12,19 @@
 
     class CreateTraineeResponse(JsonModel):
         uuid: uuid
-        request_data: CreateOrganizationRequest[]
+        request_data: CreateTraineeRequest
 
 
     @router.post(
         "/student",
-        response_model=CreateTraineeResponse,
-        summary="Create a new Student",
-        description="Create a new Student under provided organization",
+        response_model=List[CreateTraineeResponse],
+        summary="Create student/s",
+        description="Create new Student/s under provided organization",
         response_description="New Student’s meta data",
         dependencies=[Depends(allow_edit_roles), Depends(verify_org_access)],
     )
     async def create_student(
-        request: Request,
-        response: Response,
-        body: CreateTraineeRequest,
+        body: CreateTraineeRequest[],
     ):
         try:
             user = await UserService.create_user(body)
@@ -36,47 +34,49 @@
     // Edit student //
 
     class EditTraineeRequest(JsonModel):
+        id: str
         first_name: str
         last_name: str
         email: Optional[EmailStr]
         username: Optional[str]
+    
+    class EditTraineeResponse(JsonModel):
+        uuid: uuid
+        request_data: CreateTraineeRequest
 
     @router.put(
-        "/student/{student_id}",
-        response_model=StudentResponse,
-        summary="Edit a new Student",
-        description="Edit a new Student under provided organization",
+        "/student/edit",
+        response_model=List[EditTraineeResponse],
+        summary="Edit Student/s",
+        description="Edit Student/s under provided organization",
         response_description="Edited Student’s meta data",
         dependencies=[Depends(allow_edit_roles), Depends(verify_org_access)],
     )
     async def edit_student(
-        request: Request,
-        response: Response,
-        body: EditTraineeRequest,
-        student_id: str,
+        body: EditTraineeRequest[],
     ):
         try:
-            user = await UserService.edit_student(body, student_id)
+            user = await UserService.edit_student(body)
             return user
 
 
-
     // Delete student //
-        class DeactivateStudentRequest(JsonModel):
-            student_id: str
 
-        @router.put(
-            "student/deactivation",
-            summary="Deactivate a student",
-            description="Changes active status to inactive for provided User ID",
-            response_description="empty 204 response",
-            status_code=204,
-            dependencies=[Depends(allow_edit_roles)],
-        )
-        async def student_deactivation(body: DeactivateUserRequest, request: Request):
-        try:
-            resp = await UserService.student_deactivation(body.student_id)
-            return
+    class DeactivateStudentRequest(JsonModel):
+        student_id: str
+
+    @router.put(
+        "student/deactivation",
+        summary="Deactivate a student",
+        description="Changes active status to inactive for provided User ID",
+        response_description="empty 204 response",
+        status_code=204,
+        dependencies=[Depends(allow_edit_roles)],
+    )
+    async def student_deactivation(body: DeactivateUserRequest[]):
+    try:
+        resp = await UserService.student_deactivation(body)
+        return
 
 
 // 2. Create, update and deactivate Classrooms
@@ -88,35 +88,46 @@
         product_id: int
         name: str
 
+    class CreateClassroomResponse(JsonModel):
+        uuid: uuid
+        request_data: CreateClassroomRequest
+
     @router.post(
         "/classroom",
-        summary="Create Classroom",
-        description="Create a classroom classroom by provided classroom data",
+        summary="Create Classroom/s",
+        response_model=List[CreateClassroomResponse],
+        description="Create classroom/s by provided classroom data",
         response_description="Returns new Classroom's meta data",
         dependencies=[Depends(allow_edit_roles)],
     )
-    async def create_classroom(request: Request, response: Response, body: CreateClassroomRequest):
+    async def create_classroom(body: CreateClassroomRequest[]):
         classroom = await ClassroomService.create_classroom(body)
         return classroom
 
 
-    // Update classroom 
+    // Update classroom
+
+    class EditClassroomRequest(JsonModel):
+        id: str
+        organization_code: str
+        product_id: int
+        name: str
+
+    class EditClassroomResponse(JsonModel):
+        uuid: uuid
+        request_data: EditClassroomRequest
 
     @router.put(
-        "/classroom/{classroom_id}",
-        summary="Update Classroom by Classroom ID",
-        description="Update meta data for a classroom by provided classroom_id.",
+        "/classroom/edit",
+        summary="Update Classroom/s by Classroom ID",
+        response_model=List[EditClassroomResponse],
+        description="Update meta data for a classroom/s by provided classroom_id.",
         response_description="Returns updated Classroom's meta data",
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
     )
-    async def update_classroom(classroom_id: str, body: UpdateClassroomRequest):
-        classroom = await ClassroomService.update_classroom_by_classroom_id(classroom_id, body)
-        if classroom is None:
-            raise HTTPException(
-                status_code=404,
-                detail=f"Classroom ({classroom}) does not exist",
-            )
-        return classroom
+    async def update_classroom(body: UpdateClassroomRequest[]):
+        classrooms = await ClassroomService.update_classroom_by_classroom_id(body)
+        return classrooms
 
 
     // Delete classroom
@@ -132,10 +143,10 @@
         response_description="Classroom id that has been deleted",
         dependencies=[Depends(allow_edit_roles)],
     )
-    async def deactivate_classroom(request: Request, body: DeactivateClassroomRequest):
+    async def deactivate_classroom(body: DeactivateClassroomRequest[]):
     try:
-        deleted_classrooms = await ClassroomService.deactivate_classroom(body.classroom_ids)
-        return deleted_classrooms
+        await ClassroomService.deactivate_classroom(body)
+        return
 
        
 
@@ -143,49 +154,61 @@
 
     // Create Instructor
 
-    class InstructorRequest(JsonModel):
+    class CreateInstructorRequest(JsonModel):
         first_name: str
         last_name: str
         email: Optional[EmailStr]
         username: Optional[str]
         password: Optional[str]
         organization_code: str
+    
+    class CreateInstructorResponse(JsonModel):
+        uuid: uuid
+        request_data: CreateInstructorRequest
 
     @router.post(
         "/instructor",
-        response_model=NewInstructorResponse,
-        summary="Create a new Instructor",
-        description="Create a new instructor under provided organization",
+        response_model=List[CreateInstructorResponse],
+        summary="Create new Instructor/s",
+        description="Create new instructor/s under provided organization",
         response_description="New Instructor’s meta data",
         dependencies=[Depends(allow_edit_roles), Depends(verify_org_access)],
     )
     async def create_instructor(
-        request: Request,
-        response: Response,
-        body: InstructorRequest,
+        body: CreateInstructorRequest[],
     ):
         try:
-            instructor = await UserService.create_instructor(body, organization_code)
-            return instructor
+            instructors = await UserService.create_instructor(body)
+            return instructors
 
     // Edit Instructor
 
+    class EditInstructorRequest(JsonModel):
+        id: str
+        first_name: str
+        last_name: str
+        email: Optional[EmailStr]
+        username: Optional[str]
+        password: Optional[str]
+        organization_code: str
+    
+    class EditInstructorResponse(JsonModel):
+        uuid: uuid
+        request_data: EditInstructorRequest
+
     @router.put(
-        "/instructor/{instructor_id}",
-        response_model=InstructorResponse,
-        summary="Edit a new instructor",
-        description="Edit a new instructor under provided organization",
+        "/instructor/edit",
+        response_model=List[EditInstructorResponse],
+        summary="Edit instructor/s",
+        description="Edit instructor/s under provided organization",
         response_description="Edited instructor’s meta data",
         dependencies=[Depends(allow_edit_roles), Depends(verify_org_access)],
     )
-    async def edit_instructor(
-        request: Request,
-        response: Response,
-        body: InstructorRequest,
-        instructor_id: str,
+    async def edit_instructor(,
+        body: EditInstructorRequest,
     ):
         try:
-            user = await UserService.edit_instructor(body, instructor_id)
+            user = await UserService.edit_instructor(body)
             return user
 
     // Deactivate Instructor
@@ -201,34 +224,29 @@
         status_code=204,
         dependencies=[Depends(allow_edit_roles)],
     )
-    async def instructor_deactivation(body: DeactivateInstructorRequest, request: Request):
+    async def instructor_deactivation(body: DeactivateInstructorRequest[], request: Request):
     try:
-        instructor = await UserService.instructor_deactivation(body.instructor_id)
-        return instructor
+        instructor = await UserService.instructor_deactivation(body)
+        return
 
    
 // 4. Add or remove Instructors from Classrooms
     
     // Add Instructor to classroom
 
+    class AddInstructorToClassRequest(JsonModel):
+        
+
     @router.post(
-        "/classroom/{classroom_id}/instructor/{instructor_id}",
-        summary="Add instructor to classroom",
-        description="Adds provided instructor to provided classroom",
-        response_description="Returns new instructor classroom row",
+        "/classroom/instructor",
+        summary="Add instructor/s to classroom",
+        description="Adds provided instructor/s to provided classroom",
+        response_description="Returns new instructor/s classroom row",
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
         status_code=204,
     )
-    async def add_instructor_to_classroom(request: Request, instructor_id: str, classroom_id: str):
-    resp = await ClassroomService.add_instructor_to_classroom(instructor_id, classroom_id)
-
-
-    if resp is None:
-        raise HTTPException(
-            status_code=500,
-            detail=f"An error occurred while adding an instructor to a classroom with classroom_id = {classroom_id}, instructorId = {instructor_id}",
-        )
-
+    async def add_instructor_to_classroom(body: AddInstructorToClassRequest):
+        resp = await ClassroomService.add_instructor_to_classroom(instructor_id, classroom_id)
         return resp
 
     // Remove Instructor from Classroom
