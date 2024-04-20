@@ -235,33 +235,43 @@
     // Add Instructor to classroom
 
     class AddInstructorToClassRequest(JsonModel):
-        
+        classroom_id: str
+        instructor_id: str
+
+    class AddInstructorToClassResponse:
+        uuid: uuid
+        request_data: AddInstructorToClassRequest
 
     @router.post(
         "/classroom/instructor",
         summary="Add instructor/s to classroom",
+        response_model=List[AddInstructorToClassResponse],
         description="Adds provided instructor/s to provided classroom",
         response_description="Returns new instructor/s classroom row",
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
         status_code=204,
     )
-    async def add_instructor_to_classroom(body: AddInstructorToClassRequest):
-        resp = await ClassroomService.add_instructor_to_classroom(instructor_id, classroom_id)
+    async def add_instructor_to_classroom(body: AddInstructorToClassRequest[]):
+        resp = await ClassroomService.add_instructor_to_classroom(body)
         return resp
 
     // Remove Instructor from Classroom
 
+    class RemoveInstructorFromClassRequest(JsonModel):
+        classroom_id: str
+        instructor_id: str
+
     @router.delete(
-        "/classroom/{classroom_id}/instructor/{instructor_id}",
-        summary="Remove an instructor from a classroom",
-        description="Removes provided instructor from provided classroom",
+        "/classroom/instructor/remove",
+        summary="Remove instructor/s from a classroom",
+        description="Removes provided instructor/s from provided classroom/s",
         response_description="Returns 200 and removed user’s id",
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
         status_code=204,
     )
-    async def remove_instructor_from_classroom(request: Request, classroom_id: str, instructor_id: str):
+    async def remove_instructor_from_classroom(body: RemoveInstructorFromClassRequest[]):
     try:
-        resp = await ClassroomService.remove_instructor_from_classroom(classroom_id, instructor_id)
+        resp = await ClassroomService.remove_instructor_from_classroom(body)
         return
 
 
@@ -269,40 +279,46 @@
 
     // Add Student to classroom
 
+    class AddTraineeToClassRequest(JsonModel):
+        classroom_id: str
+        trainee_id: str
+
+    class AddTraineeToClassResponse:
+        uuid: uuid
+        request_data: AddTraineeToClassRequest
+
     @router.post(
-        "/classroom/{classroom_id}/trainee/{student_id}",
+        "/classroom/trainee",
         summary="Add a trainee to a classroom",
         description="Adds provided trainee to provided classroom",
         response_description="Returns new School row",
+        response_model=List[AddTraineeToClassResponse],
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
         status_code=204,
     )
-    async def add_trainee_to_classroom(request: Request, classroom_id: str, student_id: str):
+    async def add_trainee_to_classroom(body: AddTraineeToClassRequest[]):
         resp = await ClassroomService.add_trainee_to_classroom(instructor_id, classroom_id, student_id)
-        if resp is None:
-            raise HTTPException(
-                status_code=500,
-                detail=f"Internal error adding trainee {student_id} to classroom {classroom_id}",
-            )
-
-
         return resp
             
    
     // Remove student from classroom
 
-    @router.delete(
-        "/classroom/{classroom_id}/trainee/{student_id}",
+    class RemoveTraineeFromClassRequest(JsonModel):
+        classroom_id: str
+        trainee_id: str
+
+    @router.put(
+        "/classroom/trainee/remove",
         summary="Remove a trainee from a classroom",
         description="Removes provided trainee from provided classroom",
         response_description="Returns 200 and removed users id",
         dependencies=[Depends(allow_edit_roles), Depends(verify_classroom_access)],
         status_code=204,
     )
-    async def remove_trainee_from_classroom(request: Request, classroom_id: str, student_id: str):
+    async def remove_trainee_from_classroom(body: RemoveTraineeFromClassRequest[]):
     try:
-        resp = await ClassroomService.remove_trainee_from_classroom(classroom_id, student_id)
-        return resp
+        await ClassroomService.remove_trainee_from_classroom(classroom_id, student_id)
+        return
 
 
 // 6. Add update, deactivate child Organizations
@@ -314,6 +330,10 @@
         seats: int
         instructor_seats: int
         expiration: Optional[date]
+    
+    class CreateOrganizationResponse(JsonModel):
+        uuid: uuid
+        request_data: CreateOrganizationRequest
 
     @router.post(
         "/organization/child/{organization_id}",
