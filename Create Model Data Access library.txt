@@ -333,16 +333,17 @@
     
     class CreateOrganizationResponse(JsonModel):
         uuid: uuid
+        organization_id: str
         request_data: CreateOrganizationRequest
 
     @router.post(
         "/organization/child/{organization_id}",
-        summary="Add a child organization to an organization",
-        description="Add a child organization to an organization",
-        response_description="The updated organization",
+        summary="Add a child organization/s to an organization",
+        description="Add child organization/s to an organization",
+        response_description="The updated organization/s",
         response_model=Organization,
     )
-    async def add_child_to_organization(organization_id: int, body: CreateOrganizationRequest):
+    async def add_child_to_organization(organization_id: int, body: CreateOrganizationRequest[]):
         organization = await OrganizationService.add_child_organization(organization_id, body.dict())
         return organization
 
@@ -356,31 +357,38 @@
         instructor_seats: int
         expiration: Optional[date]
 
+    class UpdateOrganizationResponse(JsonModel):
+        uuid: uuid
+        organization_id: str
+        request_data: UpdateOrganizationRequest
+
     @router.put(
         "/organization/child/{organization_id}",
-        summary="Update a child organization to an organization",
-        description="Update a child organization to an organization",
+        summary="Update child organization/s to an organization",
+        description="Update child organization/s to an organization",
         response_description="The updated organization",
         response_model=Organization,
     )
-    async def update_child_to_organization(organization_id: int, body: UpdateOrganizationRequest):
-        organization = await OrganizationService.update_child_organization(organization_id, body.dict())
+    async def update_child_to_organization(organization_id: int, body: UpdateOrganizationRequest[]):
+        organization = await OrganizationService.update_child_organization(organization_id, body)
         return organization
 
 
     // Deactivate child organization
 
-    @router.delete(
-        "/organization/{organization_id}/child/{child_organization_id}",
-        summary="Remove a child organization from an organization",
-        description="Remove a child organization from an organization",
+    class DeleteOrganizationRequest(JsonModel):
+        id: str
+
+    @router.put(
+        "/organization/{organization_id}/child",
+        summary="Remove child organization from an organization",
+        description="Remove child organization from an organization",
         response_description="The updated organization",
     )
     async def remove_organization_child(
-        organization_id: int,
-        child_organization_id: int,
+        body: DeleteOrganizationRequest[]
     ):
 
-    organization = await remove_child_organization(organization_id, child_organization_id)
-    return organization
+    await remove_child_organization(organization_id, body)
+    return
 
