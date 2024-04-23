@@ -1,0 +1,700 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "LMS BE API",
+      "version": "0.0.1"
+    },
+    "paths": {
+      "/students": {
+        "post": {
+          "description": "Create students",
+          "requestBody": {
+            "description": "Students to create",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "first_name": {
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "organization_code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created students",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "organization_code": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "description": "Update students",
+          "requestBody": {
+            "description": "Students to update",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "first_name": {
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successfully updated students"
+            }
+          }
+        }
+      },
+      "/students/deactivation": {
+        "put": {
+          "description": "Deactivate students",
+          "requestBody": {
+            "description": "Students to deactivate",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully deactivated students"
+            }
+          }
+        }
+      },
+      "/classrooms": {
+        "post": {
+          "description": "Create classrooms",
+          "requestBody": {
+            "description": "Classrooms to create",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "product_id": {
+                        "type": "number"
+                      },
+                      "organization_code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created classrooms",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "product_id": {
+                          "type": "number"
+                        },
+                        "organization_code": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "description": "Update classrooms",
+          "requestBody": {
+            "description": "Classrooms to update",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "product_id": {
+                        "type": "number"
+                      },
+                      "organization_code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successfully updated classrooms"
+            }
+          }
+        }
+      },
+      "/classrooms/deactivation": {
+        "put": {
+          "description": "Deactivate classrooms",
+          "requestBody": {
+            "description": "Classrooms to deactivate",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully deactivated classrooms"
+            }
+          }
+        }
+      },
+      "/instructors": {
+        "post": {
+          "description": "Create instructors",
+          "requestBody": {
+            "description": "Instructors to create",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "first_name": {
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "organization_code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created students",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "organization_code": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "description": "Update instructors",
+          "requestBody": {
+            "description": "Instructors to update",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "first_name": {
+                        "type": "string"
+                      },
+                      "last_name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "username": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successfully updated instructors"
+            }
+          }
+        }
+      },
+      "/instructors/deactivation": {
+        "put": {
+          "description": "Deactivate instructors",
+          "requestBody": {
+            "description": "Instructors to deactivate",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully deactivated instructors"
+            }
+          }
+        }
+      },
+      "/organizations": {
+        "post": {
+          "description": "Create organizations",
+          "requestBody": {
+            "description": "Organizations to create",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "seats": {
+                        "type": "number"
+                      },
+                      "instructor_seats": {
+                        "type": "number"
+                      },
+                      "expiration": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "parent_organization_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully created organizations",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "seats": {
+                          "type": "number"
+                        },
+                        "instructor_seats": {
+                          "type": "number"
+                        },
+                        "expiration": {
+                          "type": "string",
+                          "format": "date"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "description": "Update organizations",
+          "requestBody": {
+            "description": "Organizations to update",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "seats": {
+                        "type": "number"
+                      },
+                      "instructor_seats": {
+                        "type": "number"
+                      },
+                      "expiration": {
+                        "type": "string",
+                        "format": "date"
+                      },
+                      "parent_organization_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successfully updated organizations"
+            }
+          }
+        }
+      },
+      "/organizations/deactivation": {
+        "put": {
+          "description": "Deactivate organizations",
+          "requestBody": {
+            "description": "Organizations to deactivate",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully deactivated organizations"
+            }
+          }
+        }
+      },
+      "/classrooms/students": {
+        "post": {
+          "description": "Assign students to classrooms",
+          "requestBody": {
+            "description": "Classrooms and students to assign to each other",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "classroom_id": {
+                        "type": "string"
+                      },
+                      "student_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully assigned students to classrooms"
+            }
+          }
+        }
+      },
+      "/classrooms/students/deactivation": {
+        "put": {
+          "description": "Unassign students from classrooms",
+          "requestBody": {
+            "description": "Classrooms and students to unassign from each other",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "classroom_id": {
+                        "type": "string"
+                      },
+                      "student_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully unassigned students from classrooms"
+            }
+          }
+        }
+      },
+      "/classrooms/instructors": {
+        "post": {
+          "description": "Assign instructors to classrooms",
+          "requestBody": {
+            "description": "Classrooms and instructors to assign to each other",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "classroom_id": {
+                        "type": "string"
+                      },
+                      "instructor_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Successfully assigned instructors to classrooms"
+            }
+          }
+        }
+      },
+      "/classrooms/instructors/deactivation": {
+        "put": {
+          "description": "Unassign instructors from classrooms",
+          "requestBody": {
+            "description": "Classrooms and instructors to unassign from each other",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "classroom_id": {
+                        "type": "string"
+                      },
+                      "instructor_id": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "204": {
+              "description": "Successfully unassigned instructors from classrooms"
+            }
+          }
+        }
+      }
+    }
+  }
+  
