@@ -78,7 +78,28 @@
               }
             },
             "400": {
-                "description": "Bad request, unable to create students"
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             },
               "500": {
                 "description": "Internal server error"
@@ -124,9 +145,30 @@
               "description": "Successfully updated students"
             },
             "400": {
-                "description": "Bad request, unable to update students"
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             },
-              "500": {
+            "500": {
                 "description": "Internal server error"
             }
           }
@@ -160,9 +202,30 @@
               "description": "Successfully deactivated students"
             },
             "400": {
-                "description": "Bad request, unable to deactivate students"
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             },
-              "500": {
+            "500": {
                 "description": "Internal server error"
             }
           }
@@ -226,9 +289,30 @@
               }
             },
             "400": {
-                "description": "Bad request, unable to create classrooms"
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             },
-              "500": {
+            "500": {
                 "description": "Internal server error"
             }
           }
@@ -269,9 +353,30 @@
               "description": "Successfully updated classrooms"
             },
             "400": {
-                "description": "Bad request, unable to update classrooms"
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             },
-              "500": {
+            "500": {
                 "description": "Internal server error"
             }
           }
@@ -303,12 +408,33 @@
           "responses": {
             "204": {
               "description": "Successfully deactivated classrooms",
-              "400": {
-                "description": "Bad request, unable to deactivate classrooms"
             },
-              "500": {
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
+            "500": {
                 "description": "Internal server error"
-            }
             }
           }
         }
@@ -384,6 +510,30 @@
                   }
                 }
               }
+            }, 
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             }
           }
         },
@@ -424,6 +574,30 @@
           "responses": {
             "200": {
               "description": "Successfully updated instructors"
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             }
           }
         }
@@ -454,6 +628,30 @@
           "responses": {
             "204": {
               "description": "Successfully deactivated instructors"
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             }
           }
         }
@@ -525,7 +723,31 @@
                   }
                 }
               }
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         },
         "put": {
@@ -569,7 +791,31 @@
           "responses": {
             "200": {
               "description": "Successfully updated organizations"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       },
@@ -599,7 +845,31 @@
           "responses": {
             "204": {
               "description": "Successfully deactivated organizations"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       },
@@ -631,7 +901,31 @@
           "responses": {
             "201": {
               "description": "Successfully assigned students to classrooms"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       },
@@ -663,7 +957,31 @@
           "responses": {
             "204": {
               "description": "Successfully unassigned students from classrooms"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       },
@@ -695,7 +1013,31 @@
           "responses": {
             "201": {
               "description": "Successfully assigned instructors to classrooms"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       },
@@ -727,7 +1069,31 @@
           "responses": {
             "204": {
               "description": "Successfully unassigned instructors from classrooms"
-            }
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
+            },
           }
         }
       }
