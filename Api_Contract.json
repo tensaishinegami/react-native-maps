@@ -76,6 +76,12 @@
                   }
                 }
               }
+            },
+            "400": {
+                "description": "Bad request, unable to create students"
+            },
+              "500": {
+                "description": "Internal server error"
             }
           }
         },
@@ -116,6 +122,12 @@
           "responses": {
             "200": {
               "description": "Successfully updated students"
+            },
+            "400": {
+                "description": "Bad request, unable to update students"
+            },
+              "500": {
+                "description": "Internal server error"
             }
           }
         }
@@ -146,6 +158,12 @@
           "responses": {
             "204": {
               "description": "Successfully deactivated students"
+            },
+            "400": {
+                "description": "Bad request, unable to deactivate students"
+            },
+              "500": {
+                "description": "Internal server error"
             }
           }
         }
@@ -206,6 +224,12 @@
                   }
                 }
               }
+            },
+            "400": {
+                "description": "Bad request, unable to create classrooms"
+            },
+              "500": {
+                "description": "Internal server error"
             }
           }
         },
@@ -243,6 +267,12 @@
           "responses": {
             "200": {
               "description": "Successfully updated classrooms"
+            },
+            "400": {
+                "description": "Bad request, unable to update classrooms"
+            },
+              "500": {
+                "description": "Internal server error"
             }
           }
         }
@@ -272,7 +302,13 @@
           },
           "responses": {
             "204": {
-              "description": "Successfully deactivated classrooms"
+              "description": "Successfully deactivated classrooms",
+              "400": {
+                "description": "Bad request, unable to deactivate classrooms"
+            },
+              "500": {
+                "description": "Internal server error"
+            }
             }
           }
         }
