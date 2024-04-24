@@ -691,6 +691,30 @@
           "responses": {
             "204": {
               "description": "Successfully unassigned instructors from classrooms"
+            },
+            "400": {
+                "description": "Bad request, unable to create students",
+                "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "description": "Description of the error"
+                                },
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "description": "ID of the item that caused the error"
+                                }
+                            }
+                        }
+                    }
+            
+                }
             }
           }
         }
